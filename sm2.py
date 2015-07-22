@@ -23,22 +23,19 @@ def get_next_i_interval(item, reset=False):
 	return item
 
 def get_quality_of_repetition():
-	"""
-	5 - perfect response
-	4 - correct response after a hesitation
-	3 - correct response recalled with serious difficulty
-	2 - incorrect response; where the correct one seemed easy to recall
-	1 - incorrect response; the correct one remembered
-	0 - complete blackout.
-	"""
-	prompt = "Please enter the number that corresponds with your answer\n5 - perfect response\n4 - correct response after a hesitation\n3 - correct response recalled with serious difficulty\n2 - incorrect response; where the correct one seemed easy to recall\n1 - incorrect response; the correct one remembered\n0 - complete blackout.\n\n"
+	prompt = "Please enter the number that corresponds with your answer\n" +
+			"5 - perfect response\n" + 
+			"4 - correct response after a hesitation\n" +
+			"3 - correct response recalled with serious difficulty\n" + 
+			"2 - incorrect response; where the correct one seemed easy to recall\n" + 
+			"1 - incorrect response; the correct one remembered\n" + 
+			"0 - complete blackout.\n\n"
 	while (1):
 		q = raw_input(prompt)
 		if int(q):
 			return int(q)
 
 def change_e_factor(item, q):
-	# need quality (q) and item
 	if q < 3:
 		get_next_i_interval(item, reset=True)
 	if item["e-factor"] >= 1.3:
