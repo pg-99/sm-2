@@ -57,7 +57,8 @@ def main(argv):
 	export_items(items, file_path)
 	for k in items.keys():
 		item = items[k]
-		answer = raw_input("Question: " + item["question"] +"\n")
+		user_input = raw_input("Question: " + item["question"] +"\nInput your answer: ")
+		print "Correct answer: %s \n" % ( item["answer"] )
 		q = get_quality_of_repetition()
 		item = change_e_factor(item, q)
 		item = get_next_i_interval(item)
