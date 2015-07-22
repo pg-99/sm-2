@@ -23,12 +23,12 @@ def get_next_i_interval(item, reset=False):
 	return item
 
 def get_quality_of_repetition():
-	prompt = "Please enter the number that corresponds with your answer\n" +
-			"5 - perfect response\n" + 
-			"4 - correct response after a hesitation\n" +
-			"3 - correct response recalled with serious difficulty\n" + 
-			"2 - incorrect response; where the correct one seemed easy to recall\n" + 
-			"1 - incorrect response; the correct one remembered\n" + 
+	prompt = "\nPlease enter the number that corresponds with your answer\n" + \
+			"5 - perfect response\n" + \
+			"4 - correct response after a hesitation\n" + \
+			"3 - correct response recalled with serious difficulty\n" + \
+			"2 - incorrect response; where the correct one seemed easy to recall\n" + \
+			"1 - incorrect response; the correct one remembered\n" + \
 			"0 - complete blackout.\n\n"
 	while (1):
 		q = raw_input(prompt)
@@ -42,9 +42,19 @@ def change_e_factor(item, q):
 		item["e-factor"] = item["e-factor"]+(0.1-(5-q)*(0.08+(5-q)*0.02))
 	return item
 
+def check_if_init_format(items):
+	for k in items.keys():
+		item = items[k]
+		if not item.get("e-factor", None): 
+			item["e-factor"] = 2.5
+			items[k]=item
+	return items
+
 def main(argv):
 	file_path = argv[0]
 	items = import_items(file_path)
+	items = check_if_init_format(items)
+	export_items(items, file_path)
 	for k in items.keys():
 		item = items[k]
 		answer = raw_input("Question: " + item["question"] +"\n")
